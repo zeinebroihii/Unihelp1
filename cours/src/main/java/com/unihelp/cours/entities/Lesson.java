@@ -1,27 +1,24 @@
 package com.unihelp.cours.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import com.unihelp.cours.entities.Assignment;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
-    private String content; // Text, video URL, or other content
-    private int order; // Order of the lesson in the module
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "module_id", nullable = false)
+    @JsonBackReference
     private Module module;
-
-    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Quiz> quizzes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Assignment> assignments = new ArrayList<>();
 }

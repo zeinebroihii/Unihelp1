@@ -3,6 +3,7 @@ package com.unihelp.cours.service;
 import com.unihelp.cours.clients.UserRestClient;
 import com.unihelp.cours.entities.Course;
 import com.unihelp.cours.exception.CourseNotFoundException;
+import com.unihelp.cours.model.Role;
 import com.unihelp.cours.model.User;
 import com.unihelp.cours.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,8 @@ public class CourseService {
 
     public Course createCourse(Course course) {
         User instructor = userRestClient.findUserById(course.getUserId());
-        if (!instructor.getRole().equals("MENTOR")) {
+
+        if (instructor.getRole() != Role.STUDENT) {
             throw new IllegalArgumentException("Only instructors can create courses");
         }
 

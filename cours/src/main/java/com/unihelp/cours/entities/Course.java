@@ -1,5 +1,7 @@
 package com.unihelp.cours.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.unihelp.cours.enums.Category;
 import com.unihelp.cours.model.User;
 import jakarta.persistence.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +34,10 @@ public class Course {
     private Long userId;
 
 
-
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Module> modules = new ArrayList<>();
+
 
 
 

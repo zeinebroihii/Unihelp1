@@ -3,6 +3,7 @@ package com.unihelp.cours.controller;
 import com.unihelp.cours.entities.Course;
 import com.unihelp.cours.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
